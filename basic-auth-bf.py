@@ -55,7 +55,7 @@ class UsernameThread(threading.Thread):
                         if r.status_code == 200:
                             print(f"\n\nFOUND: {uss_pass}")
 
-                            # os.system("kill -9 $(ps aux | grep -w basic-auth-bf.py | awk '{print $2}'| head -n 1)")
+                             os.system("kill -9 $(ps aux | grep -w basic-auth-bf.py | awk '{print $2}'| head -n 1)")
 
             except:
                 raise
